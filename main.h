@@ -1,15 +1,8 @@
-//On définie une structure pièce
-typedef struct piece piece;
-struct piece{
-    int enVie; //booléen 1=vrai, 0=faux
-    int posX; //position sur l'axe vertical
-    int posY; //position sur l'axe horizontal
-    char couleur[3]; // '34'=blanc(bleu), '31'=noir(rouge)
-    char valeur; //'T'=tour, 'C'=cavalier, 'F'=fou, 'D'=dame, 'R'=roi, 'P'=pion
-};
+#ifndef MAIN_H
+#define MAIN_H
 
 // On déclare un tableau à 2 dimension représentant l'échiquier
-piece plateau[8][8];
+// piece plateau[SIZE_X][SIZE_Y];
 
 //Déclaration des pièces blanches;
 piece tourGB = {1, 0, 0, "34", 'T'};
@@ -50,4 +43,7 @@ piece pion6N = {1, 6, 6, "31", 'P'};
 piece pion7N = {1, 6, 7, "31", 'P'};
 
 //Déclaration de pièce null
-piece vide = {0, 0, 0, "30", ' '};
+piece vide = {0, 0, 0, "32", ' '};
+piece videP = {0, 0, 0, "32", 'X'};
+
+#endif /* MAIN_H*/

@@ -1,42 +1,76 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "defPiece.h"
 #include "main.h"
+#include "fct.h"
+#include "deplacement.h"
 
 #define clrscr() printf("\033[H\033[2J")
 #define couleur(param1, param2) printf("\033[%s;%sm", param1, param2)
 
-void aff(){ //Affichage del'échiquier
-    clrscr();
-    char cas[] = "40"; //Couleur de fond des case (par défaut: noire)
-    couleur("40", "37"); //On change les couleurs d'affichage
-    printf("   0  1  2  3  4  5  6  7\n");
-    for (int i=0; i<8; i++) { //On parcourt le tableau
-        couleur("40", "37"); //On change les couleurs d'affichage
-        printf("%d ", i);
-        for (int j=0; j<8; j++) {
-            if(i%2 == 0){ //On blanchit les cases paires des lignes paires
-                if(j%2 == 0){
-                    strcpy(cas, "47"); //cas = "47";
-                }else{
-                    strcpy(cas, "40");
-                }
-            }else{ //On blanchit les cases impaires des lignes impaires
-                if(j%2 != 0){
-                    strcpy(cas, "47");
-                }else{
-                    strcpy(cas, "40");
-                }
-            }
-            couleur(cas, plateau[i][j].couleur); //On change les couleurs d'affichage
-            printf(" %c ", plateau[i][j].valeur); //On affiche
-        }
-        printf("\n"); //Passage à la ligne
-    }
-    printf("\n");
+void viderBuffer(){
+   int c = 0;
+   while (c != '\n' && c != EOF)
+   {
+       c = getchar();
+   }
 }
 
-void alterTable(){ //Modification de l'échiquier (déplacement de pièce)
+
+int main(int argc, char const *argv[]) {
+    //Déclaration des variables
+    piece plateau[SIZE_X][SIZE_Y];
+    int xInit = 0; //Coordonnée X de la pièce que l'user veut bouger
+    int yInit = 0; //Coordonnée Y de la pièce que l'user veut bouger
+    int xDepl = 0; //Coordonnée X de la case ou l'user veut aller
+    int yDepl = 0; //Coordonnée Y de la case ou l'user veut aller
+    char posInit[3] = "00"; //Coordonnées de la pièce saisie par l'user
+    char posDepl[3] = "00"; //Coordonnées de la case saisie par l'user
+    char whoPlay[3] = "34"; //Couleur du joueur qui doit jouer
+
+    //Initialisation
+    initialisation(plateau); //On rempli le plateau avant de commmencer la partie
+    aff(plateau, whoPlay);
+
+    while(1){
+        //On demande les coordonnées de déplacement à l'utilisateur
+        if(strncmp(whoPlay, "31", 3) == 0){
+            printf("Joueur Noire: \n");
+        }else{
+            printf("Joueur Blanc: \n");
+        }
+
+        //On demande les coordonées de la pièce à déplacer
+        printf("Coordonnées de la pièce à déplacer:\n");
+        fgets(posInit, sizeof(posInit), stdin);
+        printf("Position initiale: (%c;%c)\n", posInit[0], posInit[1]);
+        viderBuffer();
+        //On cast les coordonnées de string en int
+        xInit = (int) posInit[0] - 48;
+        yInit = (int) posInit[1] - 48;
+        depPossible(plateau, plateau[yInit][xInit], vide, videP);
+
+        //On demande les coordonnées où déplacer la pièce
+        printf("Coordonnées de déplacement:\n");
+        fgets(posDepl, sizeof(posDepl), stdin);
+        printf("Positon visé: (%c;%c)\n", posDepl[0], posDepl[1]);
+        viderBuffer();
+        //On cast les coordonnées de string en int
+        xDepl = (int) posDepl[0] - 48;
+        yDepl = (int) posDepl[1] - 48;
+
+
+        if ((xInit<8)&&(xInit>=0)&&(yInit<8)&&(yInit>=0)&&(xDepl<8)&&(xDepl>=0)&&(yDepl<8)&&(yDepl>=0))
+            move(plateau, plateau[yInit][xInit], xDepl, yDepl, whoPlay);
+        // move(plateau[4][0], "31");
+    }
+
+    couleur("37","40");
+    return 0;
+}
+
+void initialisation(piece plateau[SIZE_X][SIZE_Y]){ //Modification de l'échiquier (déplacement de pièce)
     //On remplit le plateau de caractère vide (ou de zéro)
     for(int i=0; i<8; i++) {
         for(int j=0; j<8; j++){
@@ -81,59 +115,65 @@ void alterTable(){ //Modification de l'échiquier (déplacement de pièce)
     plateau[pion5N.posX][pion5N.posY] = pion5N;
     plateau[pion6N.posX][pion6N.posY] = pion6N;
     plateau[pion7N.posX][pion7N.posY] = pion7N;
-
-    aff();
 }
 
-int move(piece p, char c[3]){ //Un des joueur joue
-    int newX = p.posX;
-    int newY = p.posY;
+void aff(piece plateau[SIZE_X][SIZE_Y], char coul[3]){ //Affichage del'échiquier
+    clrscr();
+    char cas[] = "40"; //Couleur de fond des case (par défaut: noire)
+    couleur("40", "37"); //On change les couleurs d'affichage
 
-    switch (p.valeur) {
-        case 'P':
-            if(((strncmp(p.couleur, "31", 3) == 0) && (p.posX == 6)) || ((strncmp(p.couleur, "34", 3) == 0) && (p.posX == 2))){
-                newX -= 2;
-            }else{
-                newX --;
+    if(strncmp(coul, "31", 3) == 0){
+        printf("   0  1  2  3  4  5  6  7 \n");
+        for (int i=0; i<8; i++) { //On parcourt le tableau
+            couleur("40", "37"); //On change les couleurs d'affichage
+            printf("%d ", i);
+            for (int j=0; j<8; j++) {
+                if(i%2 == 0){ //On blanchit les cases paires des lignes paires
+                    if(j%2 == 0){
+                        strcpy(cas, "47"); //cas = "47";
+                    }else{
+                        strcpy(cas, "40");
+                    }
+                }else{ //On blanchit les cases impaires des lignes impaires
+                    if(j%2 != 0){
+                        strcpy(cas, "47");
+                    }else{
+                        strcpy(cas, "40");
+                    }
+                }
+                couleur(cas, plateau[i][j].couleur); //On change les couleurs d'affichage
+                printf(" %c ", plateau[i][j].valeur); //On affiche
             }
-            break;
-
-        case 'T':
-
-            break;
-
-        case 'C':
-
-            break;
-
-        case 'F':
-
-            break;
-
-        case 'D':
-
-            break;
-
-        case 'R':
-            
-            break;
-
+            printf("\n"); //Passage à la ligne
+        }
+    }else{
+        printf("   7  6  5  4  3  2  1  0 \n");
+        for (int i=7; i>=0; i--) { //On parcourt le tableau
+            couleur("40", "37"); //On change les couleurs d'affichage
+            printf("%d ", i);
+            for (int j=7; j>=0; j--) {
+                if(i%2 == 0){ //On blanchit les cases paires des lignes paires
+                    if(j%2 == 0){
+                        strcpy(cas, "47"); //cas = "47";
+                    }else{
+                        strcpy(cas, "40");
+                    }
+                }else{ //On blanchit les cases impaires des lignes impaires
+                    if(j%2 != 0){
+                        strcpy(cas, "47");
+                    }else{
+                        strcpy(cas, "40");
+                    }
+                }
+                couleur(cas, plateau[i][j].couleur); //On change les couleurs d'affichage
+                printf(" %c ", plateau[i][j].valeur); //On affiche
+            }
+            printf("\n"); //Passage à la ligne
+        }
     }
 
-    plateau[newX][newY] = p;
-    plateau[p.posX][p.posY] = vide;
-    plateau[newX][newY].posX = newX;
-    plateau[newX][newY].posY = newY;
-    aff();
-    return 0;
-}
 
-int main(int argc, char const *argv[]) {
-    alterTable(); //On rempli le plateau avant de commmencer la partie
-
-    move(plateau[6][0], "31");
-    move(plateau[4][0], "31");
+    printf("\n");
 
     couleur("37","40");
-    return 0;
 }

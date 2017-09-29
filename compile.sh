@@ -1,3 +1,3 @@
 #!/bin/sh
-sudo gcc -o echec chess.c
-./echec
+sudo make
+sudo ./$1
