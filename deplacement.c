@@ -10,7 +10,6 @@ void depPossible(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece videP
     int pY;
     switch (p.valeur) {
         case 'P':
-            // if()
             if(strncmp(p.couleur,"34",3) == 0){
                 pX = p.posX+1;
                 while (plateau[pX][p.posY].enVie == 0) {
@@ -51,10 +50,10 @@ void depPossible(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece videP
 
 }
 
-int move(piece plateau[SIZE_X][SIZE_Y], piece p, int xDep, int yDep, char c[3], piece vide, piece videP){ //Un des joueur joue (redirection en fonction de la pièce joué)
+int move(piece plateau[SIZE_X][SIZE_Y], piece p, int xDepl, int yDepl, char c[3], piece vide, piece videP){ //Un des joueur joue (redirection en fonction de la pièce joué)
     switch (p.valeur) {
         case 'P':
-            if(movePion(plateau, p, xDep, yDep, vide, videP) != 0){
+            if(movePion(plateau, p, xDepl, yDepl, vide) != 0){
                 printf("Err\n");
                 return 1;
             }
@@ -89,33 +88,29 @@ int move(piece plateau[SIZE_X][SIZE_Y], piece p, int xDep, int yDep, char c[3], 
     }
 
 
-    initialisation(plateau);
-    aff(plateau, c);
+    // initialisation(plateau);
+    // aff(c);
     return 0;
 }
 
-int movePion(piece plateau[SIZE_X][SIZE_Y], piece p, int xDep, int yDep, piece vide, piece videP){ //Déplacement du pion
-    int newX = p.posX;
-    int newY = p.posY;
-
-    // if(((strncmp(p.couleur, "31", 3) == 0) && (p.posX == 6)) || ((strncmp(p.couleur, "34", 3) == 0) && (p.posX == 2))){
-    //     newX -= 2;
-    // }else{
-    //     newX --;
-    // }
-
-    if(plateau[yDep][xDep].enVie == 0){ //La place est libre
-        //On prépare les coordonnées
-        newX = yDep;
-        newY = xDep;
+int movePion(piece plateau[SIZE_X][SIZE_Y], piece p, int xDepl, int yDepl, piece vide){ //Déplacement du pion
+    if(plateau[yDepl][xDepl].valeur == 'X'){ //La place est libre
+        plateau[yDepl][xDepl] = p;
+        plateau[p.posX][p.posY] = vide;
 
         //On déplace la pièce
-        plateau[newX][newY] = p;
-        plateau[p.posX][p.posY] = vide;
-        plateau[newX][newY].posX = newX;
-        plateau[newX][newY].posY = newY;
+
+        plateau[yDepl][xDepl].posX = yDepl;
+        plateau[yDepl][xDepl].posY = xDepl;
     }else{
-        printf("La case (%d;%d) est occupé\n", yDep, xDep);
+        printf("La case (%d;%d) est occupé\n", yDepl, xDepl);
+    }
+    for(int i=0; i<SIZE_X; i++) {
+        for (int j=0; j<SIZE_Y; j++) {
+            if(plateau[i][j].valeur == 'X'){
+                plateau[i][j].valeur = ' ';
+            }
+        }
     }
 
     return 0;

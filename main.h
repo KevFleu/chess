@@ -1,15 +1,12 @@
-#ifndef MAIN_H
-#define MAIN_H
-
 // On déclare un tableau à 2 dimension représentant l'échiquier
-// piece plateau[SIZE_X][SIZE_Y];
+
 
 //Déclaration des pièces blanches;
 piece tourGB = {1, 0, 0, "34", 'T'};
 piece cavalierGB = {1, 0, 1, "34", 'C'};
 piece fouGB = {1, 0, 2, "34", 'F'};
-piece dameB = {1, 0, 3, "34", 'D'};
-piece roiB = {1, 0, 4, "34", 'R'};
+piece roiB = {1, 0, 3, "34", 'R'};
+piece dameB = {1, 0, 4, "34", 'D'};
 piece fouDB = {1, 0, 5, "34", 'F'};
 piece cavalierDB = {1, 0, 6, "34", 'C'};
 piece tourDB = {1, 0, 7, "34", 'T'};
@@ -41,9 +38,3 @@ piece pion4N = {1, 6, 4, "31", 'P'};
 piece pion5N = {1, 6, 5, "31", 'P'};
 piece pion6N = {1, 6, 6, "31", 'P'};
 piece pion7N = {1, 6, 7, "31", 'P'};
-
-//Déclaration de pièce null
-piece vide = {0, 0, 0, "32", ' '};
-piece videP = {0, 0, 0, "32", 'X'};
-
-#endif /* MAIN_H*/
