@@ -10,17 +10,29 @@ void depPossible(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece videP
     int pY;
     switch (p.valeur) {
         case 'P':
-            if(strncmp(p.couleur,"34",3) == 0){
+            if(strncmp(p.couleur,"34",3) == 0){ //Blanc
                 pX = p.posX+1;
-                while (plateau[pX][p.posY].enVie == 0) {
+                int dep = 1;
+                int max = 1;
+                if (p.posX==1){
+                    max = 2;
+                }
+                while ((plateau[pX][p.posY].enVie == 0) && (dep<=max)) {
                     plateau[pX][p.posY] = videP;
                     pX++;
+                    dep++;
                 }
-            }else{
+            }else{ //Noir
                 pX = p.posX-1;
-                while (plateau[pX][p.posY].enVie == 0) {
+                int dep = 1;
+                int max = 1;
+                if (p.posX==6){
+                    max = 2;
+                }
+                while ((plateau[pX][p.posY].enVie == 0) && (dep<=max)) {
                     plateau[pX][p.posY] = videP;
                     pX--;
+                    dep++;
                 }
             }
             break;
