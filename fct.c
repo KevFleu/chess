@@ -28,14 +28,14 @@ void initialisation(piece plateau[SIZE_X][SIZE_Y], piece vide){ //initialisation
     plateau[cavalierDB.posX][cavalierDB.posY] = cavalierDB;
     plateau[tourDB.posX][tourDB.posY] = tourDB;
     //On positionne les pions blanches
-    plateau[pion0B.posX][pion0B.posY] = pion0B;
-    plateau[pion1B.posX][pion1B.posY] = pion1B;
-    plateau[pion2B.posX][pion2B.posY] = pion2B;
-    plateau[pion3B.posX][pion3B.posY] = pion3B;
-    plateau[pion4B.posX][pion4B.posY] = pion4B;
-    plateau[pion5B.posX][pion5B.posY] = pion5B;
-    plateau[pion6B.posX][pion6B.posY] = pion6B;
-    plateau[pion7B.posX][pion7B.posY] = pion7B;
+    // plateau[pion0B.posX][pion0B.posY] = pion0B;
+    // plateau[pion1B.posX][pion1B.posY] = pion1B;
+    // plateau[pion2B.posX][pion2B.posY] = pion2B;
+    // plateau[pion3B.posX][pion3B.posY] = pion3B;
+    // plateau[pion4B.posX][pion4B.posY] = pion4B;
+    // plateau[pion5B.posX][pion5B.posY] = pion5B;
+    // plateau[pion6B.posX][pion6B.posY] = pion6B;
+    // plateau[pion7B.posX][pion7B.posY] = pion7B;
 
     //On positionne les pièces noires
     plateau[tourGN.posX][tourGN.posY] = tourGN;
