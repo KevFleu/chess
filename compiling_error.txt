@@ -1,8 +1,0 @@
-/Users/kinou/Documents/ESIEE/C/chess.c:29:10: error: array initializer must be an initializer list or string literal
-    char whoPlay[3] =
-         ^
-/Users/kinou/Documents/ESIEE/C/chess.c:35:49: warning: format specifies type 'int' but the argument has type 'char *' [-Wformat]
-    printf("Prise en main de la pièce à%c\n", posInit);
-                                       ~~     ^~~~~~~
-                                       %s
-1 warning and 1 error generated.

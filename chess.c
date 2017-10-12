@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "defPiece.h"
 #include "fct.h"
 #include "deplacement.h"
@@ -32,7 +33,7 @@ int main(int argc, char const *argv[]) {
     char whoPlay[3] = "34"; //Couleur du joueur qui doit jouer
 
     //Initialisation
-    initialisation(plateau); //On rempli le plateau avant de commmencer la partie
+    initialisation(plateau, vide); //On rempli le plateau avant de commmencer la partie
 
     while(1){
         aff(plateau, whoPlay);
@@ -47,11 +48,14 @@ int main(int argc, char const *argv[]) {
         printf("Coordonnées de la pièce à déplacer:\n");
         fgets(posInit, sizeof(posInit), stdin);
         printf("Position initiale: (%c;%c)\n", posInit[0], posInit[1]);
-        viderBuffer();
         //On cast les coordonnées de string en int
         xInit = (int) posInit[0] - 48;
         yInit = (int) posInit[1] - 48;
+        viderBuffer();
+        printf("Positon visé char: (%c;%c)\n", posInit[0], posInit[1]);
+        printf("Positon visé int: (%d;%d)\n", xInit, yInit);
         depPossible(plateau, plateau[yInit][xInit], vide, videP);
+        printf("1PieceI: %c\n", plateau[yInit][xInit].valeur);
 
         //On demande les coordonnées où déplacer la pièce
         printf("Coordonnées de déplacement:\n");
@@ -61,12 +65,13 @@ int main(int argc, char const *argv[]) {
         //On cast les coordonnées de string en int
         xDepl = (int) posDepl[0] - 48;
         yDepl = (int) posDepl[1] - 48;
+        printf("Piece: %c\n", plateau[yDepl][xDepl].valeur);
+        printf("2PieceI: %c\n", plateau[yInit][xInit].valeur);
 
-
-        if ((xInit<8)&&(xInit>=0)&&(yInit<8)&&(yInit>=0)&&(xDepl<8)&&(xDepl>=0)&&(yDepl<8)&&(yDepl>=0)){
-            move(plateau, plateau[yInit][xInit], xDepl, yDepl, whoPlay, vide, videP);
+        // if (plateau[yDepl][xDepl].valeur == 'X'){
             printf("ok\n");
-        }
+            move(plateau, plateau[yInit][xInit], xDepl, yDepl, whoPlay, vide, videP);
+        // }
     }
 
     couleur("37","40");

@@ -6,12 +6,11 @@
 #include "deplacement.h"
 #include "main.h"
 
-
 #define clrscr() printf("\033[H\033[2J")
 #define couleur(param1, param2) printf("\033[%s;%sm", param1, param2)
 #define couleur1(param) printf("\033[%sm", param)
 
-void initialisation(piece plateau[SIZE_X][SIZE_Y]){ //initialisation de l'échiquier
+void initialisation(piece plateau[SIZE_X][SIZE_Y], piece vide){ //initialisation de l'échiquier
     //On remplit le plateau de caractère vide (ou de zéro)
     for(int i=0; i<8; i++) {
         for(int j=0; j<8; j++){
