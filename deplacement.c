@@ -30,7 +30,7 @@ void depPossible(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece videP
             break;
 
         case 'R':
-
+            depRoi(plateau, p, vide, videP);
             break;
 
     }
@@ -200,6 +200,43 @@ int depFou(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece videP){
             pX--;
             pY++;
         }
+    }
+    return 0;
+}
+
+int depRoi(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece videP){
+    int pX, pY;
+    pX = p.posX+1;
+    pY = p.posY+1;
+    if((p.posX<7) && (plateau[pX][p.posY].enVie == 0)){
+        plateau[pX][p.posY] = videP;
+    }
+    if((p.posX<7) && (p.posY<7) && (plateau[p.posX][pY].enVie == 0)) {
+        plateau[pX][pY] = videP;
+    }
+    if((p.posY<7) && (plateau[p.posX][pY].enVie == 0)) {
+        plateau[p.posX][pY] = videP;
+    }
+    pX = p.posX-1;
+    pY = p.posY-1;
+    if((p.posX>0) && (plateau[pX][p.posY].enVie == 0)) {
+        plateau[pX][p.posY] = videP;
+    }
+    if((p.posX>0) && (p.posY>0) && (plateau[p.posX][pY].enVie == 0)) {
+        plateau[pX][pY] = videP;
+    }
+    if((p.posY>0) && (plateau[p.posX][pY].enVie == 0)) {
+        plateau[p.posX][pY] = videP;
+    }
+    pX = p.posX-1;
+    pY = p.posY+1;
+    if((p.posX>=0) && (p.posY<7) && (plateau[p.posX][pY].enVie == 0)) {
+        plateau[pX][pY] = videP;
+    }
+    pX = p.posX+1;
+    pY = p.posY-1;
+    if((p.posX<7) && (p.posY>0) && (plateau[p.posX][pY].enVie == 0)) {
+        plateau[pX][pY] = videP;
     }
     return 0;
 }

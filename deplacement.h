@@ -4,3 +4,4 @@ extern int depPion(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece vid
 extern int depTour(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece videP);
 extern int depCav(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece videP);
 extern int depFou(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece videP);
+extern int depRoi(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece videP);
