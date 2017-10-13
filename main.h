@@ -5,10 +5,10 @@
 piece tourGB = {1, 0, 0, "34", 'T'};
 piece cavalierGB = {1, 0, 1, "34", 'C'};
 piece fouGB = {1, 0, 2, "34", 'F'};
-piece roiB = {1, 3, 3, "34", 'R'};
+piece roiB = {1, 0, 3, "34", 'R'};
 piece dameB = {1, 0, 4, "34", 'D'};
 piece fouDB = {1, 0, 5, "34", 'F'};
-piece cavalierDB = {1, 0, 6, "34", 'C'};
+piece cavalierDB = {1, 3, 3, "34", 'C'};
 piece tourDB = {1, 0, 7, "34", 'T'};
 //Déclaration des pions blancs
 piece pion0B = {1, 1, 0, "34", 'P'};
@@ -31,10 +31,10 @@ piece cavalierDN = {1, 7, 6, "31", 'C'};
 piece tourDN = {1, 7, 7, "31", 'T'};
 //Déclaration des pions noirs
 piece pion0N = {1, 6, 0, "31", 'P'};
-piece pion1N = {1, 6, 1, "31", 'P'};
-piece pion2N = {1, 6, 2, "31", 'P'};
-piece pion3N = {1, 6, 3, "31", 'P'};
-piece pion4N = {1, 6, 4, "31", 'P'};
-piece pion5N = {1, 6, 5, "31", 'P'};
-piece pion6N = {1, 6, 6, "31", 'P'};
-piece pion7N = {1, 6, 7, "31", 'P'};
+piece pion1N = {1, 5, 2, "31", 'P'};
+piece pion2N = {1, 4, 5, "31", 'P'};
+piece pion3N = {1, 4, 1, "31", 'P'};
+piece pion4N = {1, 2, 5, "31", 'P'};
+piece pion5N = {1, 2, 1, "31", 'P'};
+piece pion6N = {1, 1, 4, "31", 'P'};
+piece pion7N = {1, 1, 2, "31", 'P'};
