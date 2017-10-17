@@ -82,12 +82,25 @@ int depPion(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece videP){ //
         if (p.posX==1){
             max = 2;
         }
-        while ((plateau[pX][p.posY].enVie == 0) && (dep<=max)) {
+        while((plateau[pX][p.posY].enVie == 0) && (dep<=max)) {
             plateau[pX][p.posY] = videP;
             pX++;
             dep++;
         }
-    }else{ //Noir
+
+        pX = p.posX+1;
+        if(p.posY<7){
+            if((plateau[pX][p.posY+1].enVie == 1) && (strncmp(plateau[pX][p.posY+1].couleur, p.couleur, 3) != 0)){
+                strcpy(plateau[pX][p.posY+1].couleur, "35");
+            }
+        }
+        if(p.posY>0){
+            if((plateau[pX][p.posY-1].enVie == 1) && (strncmp(plateau[pX][p.posY+1].couleur, p.couleur, 3) != 0)){
+                strcpy(plateau[pX][p.posY-1].couleur, "35");
+            }
+        }
+    }
+    else{ //Noir
         pX = p.posX-1;
         int dep = 1;
         int max = 1;
@@ -99,7 +112,18 @@ int depPion(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece videP){ //
             pX--;
             dep++;
         }
+
+        pX = p.posX-1;
+        if((plateau[pX][p.posY+1].enVie == 1) && (strncmp(plateau[pX][p.posY+1].couleur, p.couleur, 3) != 0)){
+            strcpy(plateau[pX][p.posY+1].couleur, "35");
+        }
+        pX = p.posX-1;
+        if((plateau[pX][p.posY-1].enVie == 1) && (strncmp(plateau[pX][p.posY+1].couleur, p.couleur, 3) != 0)){
+            strcpy(plateau[pX][p.posY-1].couleur, "35");
+        }
     }
+
+
     return 0;
 }
 
