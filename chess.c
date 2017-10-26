@@ -27,14 +27,16 @@ int main(int argc, char const *argv[]) {
     int yInit = 3; //Coordonnée Y de la pièce que l'user veut bouger
     int xDepl = 0; //Coordonnée X de la case ou l'user veut aller
     int yDepl = 0; //Coordonnée Y de la case ou l'user veut aller
+    int echec = 0;
     char posInit[3] = "00"; //Coordonnées de la pièce saisie par l'user
     char posDepl[3] = "00"; //Coordonnées de la case saisie par l'user
     char whoPlay[3] = "34"; //Couleur du joueur qui doit jouer
 
+
     //Initialisation
     initialisation(plateau, vide); //On rempli le plateau avant de commmencer la partie
 
-    while(1){
+    while(echec == 0){
         //On demande les coordonnées de déplacement à l'utilisateur
         if(strncmp(whoPlay, "31", 3) == 0){
             printf("Joueur Noir: \n");
@@ -57,7 +59,8 @@ int main(int argc, char const *argv[]) {
 
         depPossible(plateau, plateau[yInit][xInit], vide, videP);
 
-
+        do{
+            aff(plateau, whoPlay);
             //On demande les coordonnées où déplacer la pièce
             printf("Coordonnées de déplacement:\n");
             fgets(posDepl, sizeof(posDepl), stdin);
@@ -70,8 +73,8 @@ int main(int argc, char const *argv[]) {
 
             printf("ok\n");
             move(plateau, plateau[yInit][xInit], xDepl, yDepl, whoPlay, vide, videP);
+        }while((plateau[yDepl][xDepl].valeur != 'X') || ((yDepl != yInit) && (xDepl != xInit)));
     }
-
     couleur("37","40");
     return 0;
 }
