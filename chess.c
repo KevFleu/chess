@@ -27,7 +27,7 @@ int main(int argc, char const *argv[]) {
     int yInit = 3; //Coordonnée Y de la pièce que l'user veut bouger
     int xDepl = 0; //Coordonnée X de la case ou l'user veut aller
     int yDepl = 0; //Coordonnée Y de la case ou l'user veut aller
-    int echec = 0;
+    int echec = 0; //Booleen le roi est en echec
     char posInit[3] = "00"; //Coordonnées de la pièce saisie par l'user
     char posDepl[3] = "00"; //Coordonnées de la case saisie par l'user
     char whoPlay[3] = "34"; //Couleur du joueur qui doit jouer
@@ -45,6 +45,7 @@ int main(int argc, char const *argv[]) {
         }
 
         while(strcmp(plateau[yInit][xInit].couleur, whoPlay) != 0){
+            askInit:
             aff(plateau, whoPlay);
             //On demande les coordonées de la pièce à déplacer
             printf("Coordonnées de la pièce à déplacer:\n");
@@ -70,10 +71,14 @@ int main(int argc, char const *argv[]) {
             xDepl = (int) posDepl[0] - 48;
             yDepl = (int) posDepl[1] - 48;
 
-
-            printf("ok\n");
-            move(plateau, plateau[yInit][xInit], xDepl, yDepl, whoPlay, vide, videP);
+            if((yDepl == yInit) && (xDepl == xInit)){
+                nettoyage(plateau, whoPlay);
+                goto askInit;
+            }
         }while((plateau[yDepl][xDepl].valeur != 'X') || ((yDepl != yInit) && (xDepl != xInit)));
+
+        printf("ok\n");
+        move(plateau, plateau[yInit][xInit], xDepl, yDepl, whoPlay, vide, videP);
     }
     couleur("37","40");
     return 0;

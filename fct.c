@@ -118,3 +118,16 @@ void aff(piece plateau[SIZE_X][SIZE_Y], char coul[3]){ //Affichage del'échiquie
     couleur1("0");
     couleur("37","40");
 }
+
+void nettoyage(piece plateau[SIZE_X][SIZE_Y], char c[3]){
+    for(int i=0; i<SIZE_X; i++) { //On rétablit l'état des pièces de l'échiquier
+        for (int j=0; j<SIZE_Y; j++) {
+            if(plateau[i][j].valeur == 'X'){
+                plateau[i][j].valeur = ' ';
+            }
+            if(strncmp(plateau[i][j].couleur,"35", 3) == 0){
+                strcpy(plateau[i][j].couleur, c);
+            }
+        }
+    }
+}

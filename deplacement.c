@@ -57,16 +57,7 @@ int move(piece plateau[SIZE_X][SIZE_Y], piece p, int xDepl, int yDepl, char c[3]
         strcpy(c,"31");
     }
 
-    for(int i=0; i<SIZE_X; i++) { //On rétablit l'état des pièces de l'échiquier
-        for (int j=0; j<SIZE_Y; j++) {
-            if(plateau[i][j].valeur == 'X'){
-                plateau[i][j].valeur = ' ';
-            }
-            if(strncmp(plateau[i][j].couleur,"35", 3) == 0){
-                strcpy(plateau[i][j].couleur, c);
-            }
-        }
-    }
+    nettoyage(plateau, c);
 
     return 0;
 }
