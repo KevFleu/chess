@@ -57,7 +57,7 @@ void initialisation(piece plateau[SIZE_X][SIZE_Y], piece vide){ //Initialisation
     plateau[pion7N.posX][pion7N.posY] = pion7N;
 }
 
-void aff(piece plateau[SIZE_X][SIZE_Y], char coul[3]){ //Affichage del'échiquier
+void aff(piece plateau[SIZE_X][SIZE_Y], char coul[3]){ //Affichage de l'échiquier
     clrscr();
     couleur1("1");
     char cas[] = "40"; //Couleur de fond des case (par défaut: noire)
@@ -119,7 +119,7 @@ void aff(piece plateau[SIZE_X][SIZE_Y], char coul[3]){ //Affichage del'échiquie
     couleur("37","40");
 }
 
-void nettoyage(piece plateau[SIZE_X][SIZE_Y], char c[3]){
+void nettoyage(piece plateau[SIZE_X][SIZE_Y], char c[3]){ //Nettoyage après depPossible
     for(int i=0; i<SIZE_X; i++) { //On rétablit l'état des pièces de l'échiquier
         for (int j=0; j<SIZE_Y; j++) {
             if(plateau[i][j].valeur == 'X'){

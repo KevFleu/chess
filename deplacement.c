@@ -34,7 +34,7 @@ void depPossible(piece plateau[SIZE_X][SIZE_Y], piece p, piece vide, piece videP
             break;
 
     }
-    aff(plateau, p.couleur);
+    // aff(plateau, p.couleur);
 
 }
 
@@ -57,6 +57,18 @@ int move(piece plateau[SIZE_X][SIZE_Y], piece p, int xDepl, int yDepl, char c[3]
         strcpy(c,"31");
     }
 
+    nettoyage(plateau, c);
+
+    depPossible(plateau, plateau[yDepl][xDepl], vide, videP);
+    aff(plateau, c);
+    for(int i = 0; i<SIZE_X; i++){
+        for(int j = 0; j<SIZE_Y; j++){
+            if((plateau[i][j].valeur == 'R') && (strcmp(plateau[i][j].couleur, "35")==0)){
+                nettoyage(plateau, c);
+                return 1;
+            }
+        }
+    }
     nettoyage(plateau, c);
 
     return 0;
